@@ -4,11 +4,11 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
-import { StrainOnlineComponent } from '../pages/strainOnline/strainOnline.component'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { StrainOnline } from '../pages/StrainOnline/StrainOnline';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +32,7 @@ export class MyApp {
     this.pages = [
       { title: 'Hello Ionic', component: HelloIonicPage },
       { title: 'My First List', component: ListPage },
-      { title: '冲击地压' , component: StrainOnlineComponent}
+      { title: '冲击地压' , component: StrainOnline}
     ];
   }
 

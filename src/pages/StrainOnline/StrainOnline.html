@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-navbar>
+      <button  *ngIf="!selectedItem">
+        <ion-icon name=""></ion-icon>
+      </button>
+      <ion-title>Item Details {{selectedItem.title}}</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+
+  <h1>KJ649应力在线监测预警系统日报表({{data.area}}掘进工作面)</h1>
+  <table>
+    <tr>
+      <td colspan="2">监测日期:</td>
+      <td colspan="5">{{data.detectTime}} </td>
+      <td colspan="2">上报日期:</td>
+      <td colspan="3"> {{data.reportTime}}</td>
+    </tr>
+    <tr>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+      <td class="none"> </td>
+    </tr>
+
+    <tr>
+      <th class="big" colspan="12">掘进工作面参数</th>
+    </tr>
+
+    <tr>
+        <td colspan="2">设计长度</td><td colspan="4">{{data.length}}</td>
+        <td colspan="2">剩余长度</td><td colspan="4">{{data.remainLength}}</td>          
+</tr>
+<tr><th class="big" colspan="12">掘进工作面进尺</th></tr>
+<tr>
+        <td colspan="2">本日进尺</td><td colspan="2">{{data.todayLength}}</td>
+        <td colspan="2">本月累计进尺</td><td colspan="2">{{data.monthLength}}</td>          
+        <td colspan="2">总进尺</td><td colspan="2">{{data.totalLength}}</td>          
+</tr>
+<tr><th class="big" colspan="12" >监测数据统计信息</th></tr>
+<tr>
+                <th colspan="2">测点名称</th><th>距开口距离</th>
+                <th >安装深度</th><th>初始预压</th>
+                <th >当前应力值</th><th>增幅变化率</th>
+                <th >当日变化量</th><th>最大值</th>
+                <th colspan="2" >最大值时刻</th><th>预警级别</th>      
+</tr>
+
+<tr *ngFor="let cell of data.datas"> 
+        <td colspan="2">{{cell.name}}</td><td>{{cell.length}}</td>
+        <td >{{cell.length}}</td><td>{{cell.first}}</td>
+        <td >{{cell.now}}</td><td>{{cell.changeRate}}</td>
+        <td >{{cell.nowChange}}</td><td>{{cell.max}}</td>
+        <td colspan="2" >{{cell.maxTime}}</td>
+
+                <td class="{{cell.warningLevel}}" >{{cell.warningLevel}}
+                </td>
+                  
+
+</tr>
+        <tr><th class="big" colspan="12" >{{data.area}}掘进工作面最大时刻云图及柱状图</th></tr>
+<tr>
+        <td colspan="12"><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3384623684,3529436072&fm=26&gp=0.jpg"></td>
+</tr>
+<tr>
+                <td colspan="1">制表单位:</td><td colspan="2"></td>
+                <td colspan="1">汇报人:</td><td colspan="2"></td>
+                <td colspan="1">主任:</td><td colspan="2"></td>
+                <td colspan="">副总:</td><td colspan="2"></td>
+
+</tr>
+  </table>
+
+</ion-content>
