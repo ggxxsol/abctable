@@ -62,3 +62,13 @@ tr:nth-child(even) {
 img{
 	width:100%;
 }
+
+#echarts-table{
+	min-height: 200px;
+	min-width: 150px;
+	height: 400px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
