@@ -60,9 +60,7 @@ export class ZMineTable {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
     if (!this.selectedItem) {
-
     }
-
   }
 
   ngAfterContentInit() {
@@ -73,12 +71,8 @@ export class ZMineTable {
 
     // 指定图表的配置项和数据
     this.echartsShow.setOption({
-      tooltip: {
-          trigger: 'item',
-          x:50,
-          y:100,
-      },
-      xAxis: {
+      tooltip: {trigger: 'item'},//鼠标停留时的显示信息
+      xAxis: {//x坐标轴
           data: this.data.datas.map(function (item) {
             return item.uniqueId;})
       },
@@ -110,16 +104,12 @@ export class ZMineTable {
           {gt: 5,lte:7.5,color:'yellow'},
           {gt: 7.5,color:'red'},
         ],
-
         color: ['green','yellow','red'],
-        textStyle: {
-            color: '#000000'
-        }
+        textStyle: {color: '#000000'}
     },
       series: {
           name: '',
           type: 'bar',
-          
           data: this.data.datas.map(function (item) {
             return item.now;}),
              label: {
@@ -130,8 +120,7 @@ export class ZMineTable {
             }},
           markLine: {
               silent: true,
-              data: [{
-                  yAxis: 5
+              data: [{yAxis: 5
               }, {
                   yAxis: 10
               }, {
