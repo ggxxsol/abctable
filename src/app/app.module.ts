@@ -7,7 +7,7 @@ import { MyApp } from './app.component';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
-import { StrainOnline } from '../pages/StrainOnline/StrainOnline';
+import { ZMineTable } from '../pages/ZMineTable/ZMineTable.component';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,7 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HelloIonicPage,
     ItemDetailsPage,
-    ListPage,StrainOnline
+    ListPage,ZMineTable
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HelloIonicPage,
     ItemDetailsPage,
-    ListPage,StrainOnline
+    ListPage,ZMineTable
   ],
   providers: [
     StatusBar,

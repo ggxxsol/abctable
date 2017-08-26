@@ -4,7 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { ItemDetailsPage } from '../item-details/item-details';
 
-import { StrainOnline } from '../StrainOnline/StrainOnline';
+import { ZMineTable } from '../ZMineTable/ZMineTable.component';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
@@ -28,6 +28,6 @@ export class ListPage {
   }
 
   itemTapped(event, item) {
-    this.navCtrl.push(StrainOnline, {item: item});
+    this.navCtrl.push(ZMineTable, {item: item});
   }
 }

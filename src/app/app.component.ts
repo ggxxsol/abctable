@@ -8,7 +8,7 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { StrainOnline } from '../pages/StrainOnline/StrainOnline';
+import { ZMineTable } from '../pages/ZMineTable/ZMineTable.component';
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +32,7 @@ export class MyApp {
     this.pages = [
       { title: 'Hello Ionic', component: HelloIonicPage },
       { title: 'My First List', component: ListPage },
-      { title: '冲击地压' , component: StrainOnline}
+      { title: '冲击地压' , component: ZMineTable}
     ];
   }
 
