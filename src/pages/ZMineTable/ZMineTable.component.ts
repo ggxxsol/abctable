@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
 import { ViewController,NavController,ModalController, NavParams } from 'ionic-angular';
+import { ZeditTable } from './ZeditTable.component'
+
 const gZtempData = {
   mZtableName:'KJ649应力在线监测预警系统日报表',mZarea: '泰安001', mZdetectTime: '201 -XX-XX XX:XX:XX------20XX-XX-XX', mZreportTime: '2015-5-6', mZlength: '500m',
   mZremainLength: '100m', mZtodayLength: '20m', mZmonthLength: '360m', mZtotalLength: '2000m',
@@ -152,10 +153,9 @@ export class ZMineTable {
     }
   }
 
-  showEdit(data?){
+  showEdit(data?,tableName?){
     if(this.headerRight.text=="开启编辑"){
-      alert(data.mZtableName)
-      let profileModal = this.modalCtrl.create(ZeditTable,{thisData:data});
+      let profileModal = this.modalCtrl.create(ZeditTable,{thisData:data,name:tableName});
       profileModal.present();
     }
   }
@@ -168,24 +168,3 @@ export class ZMineTable {
 }
 
 
-@Component({
-  selector: 'editTable',
-  templateUrl: 'ZeditTable.component.html'
-})
-export class ZeditTable{
-  data1:any;
-  data:any;
-  constructor(params?: NavParams,public viewCtrl?: ViewController) {
-    this.data1=params;
-  }
-  ngAfterContentInit() {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
-    this.data=this.data1.get('thisData');
-    alert(this.data.mZtableName)
-  }
-
-  close(){
-    this.viewCtrl.dismiss();
-  }
-}

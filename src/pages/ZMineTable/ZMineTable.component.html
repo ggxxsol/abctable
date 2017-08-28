@@ -13,7 +13,7 @@
 
 <ion-content padding>
   <div class="floatEdit"></div>
-  <h1>({{mZdata.mZarea}}掘进工作面)</h1>
+  <h1>{{mZdata.mZtableName}}({{mZdata.mZarea}}掘进工作面)</h1>
   <table>
     <tr>
       <td colspan="2">监测日期:</td>
@@ -74,7 +74,7 @@
     </tr>
 
     <tr class="currectData" *ngFor="let cell of mZdata.datas" (click)="showEdit(cell)">
-      <td colspan="2" (click)="showEdit(cell)">{{cell.mZname}}</td>
+      <td colspan="2" (click)="showEdit(cell,mZdata.mZtableName)">{{cell.mZname}}</td>
       <td>{{cell.mZlength}}</td>
       <td>{{cell.mZlength}}</td>
       <td>{{cell.mZfirst}}</td>

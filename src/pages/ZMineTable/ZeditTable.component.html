@@ -1,16 +1,20 @@
 <ion-header>
     <ion-navbar>
-        <ion-buttons style="float: left;">
-            <a>
-                <ion-icon name='book' (click)="close()">返回{{data.mZtableName}}</ion-icon>
-            </a>
-        </ion-buttons>
-        <h1>测试</h1>
-        <ion-buttons style="float: right;">
-            <a>
-                <ion-icon name='book' (click)="close()">确定</ion-icon>
-            </a>
-        </ion-buttons>
+        <ion-row>
+            <ion-col col-3>
+                <button ion-button (click)="close()" color="secondary" style="left:0px">
+                <ion-icon name='book'>返回</ion-icon>
+            </button>
+            </ion-col>
+            <ion-col col-6 style="text-align: center;font-size: 30px;">
+                vsjm
+            </ion-col>
+            <ion-col col-3 style="right:0px">
+                <button ion-button (click)="close()" color="secondary" >
+                    <ion-icon name='book'>后面</ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
 
     </ion-navbar>
 </ion-header>
