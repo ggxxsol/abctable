@@ -43,13 +43,6 @@ th {
 }
 
 
-tr:nth-child(even) {
-	border-width: 1px;
-	padding: 3px;
-	border-style: solid;
-	border-color: #666666;
-	background-color: #dedede;
-}
 
 
 .none{
@@ -71,4 +64,37 @@ img{
 	right: 0;
 	bottom: 0;
 	left: 0;
+}
+
+.floatEdit{
+	right: 50px;
+	top: 30px;
+	position: absolute;
+	padding: 10px;
+	
+}
+.currectData:hover{
+	color: #000000;
+	background: #2EF6F8;
+}
+
+tr:nth-child(even) {
+	border-width: 1px;
+	padding: 3px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+
+.editPad{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 1000px;
+	width: 2000px;
+	background: #999999;
+	
+}
+.editTalbe{
+	margin-top: 20%;
 }

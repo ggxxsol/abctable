@@ -2,45 +2,35 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
 const gZtempData = {
-  area: '泰安001', detectTime: '2015-5-5    -----    2015-5-6', reportTime: '2015-5-6', length: '500m',
-  remainLength: '100m', todayLength: '20m', monthLength: '360m', totalLength: '2000m',
+  mZarea: '泰安001', mZdetectTime: '201 -XX-XX XX:XX:XX------20XX-XX-XX', mZreportTime: '2015-5-6', mZlength: '500m',
+  mZremainLength: '100m', mZtodayLength: '20m', mZmonthLength: '360m', mZtotalLength: '2000m',
   datas: [
-    {
-      uniqueId: 0, name: '第一坑道', length: '100', deep: '150', first: '0', now: '5', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '绿色'
+    { 
+      mZuniqueId: 0, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '1', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '绿色'
+    },    { 
+      mZuniqueId: 1, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '3', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '红色'
+    },    { 
+      mZuniqueId: 2, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '9', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '黄色'
+    },    { 
+      mZuniqueId: 3, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '10', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '绿色'
+    },    { 
+      mZuniqueId: 4, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '20', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '红色'
+    },    { 
+      mZuniqueId: 5, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '6', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '绿色'
+    },    { 
+      mZuniqueId: 6, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '18', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '黄色'
+    },    { 
+      mZuniqueId: 7, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '3', mZchangeRate: '50%',
+      mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '黄色'
     },
-    {
-      uniqueId: 1, name: '第一坑道', length: '100', deep: '150', first: '0', now: '6', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '黄色'
-    },
-    {
-      uniqueId: 2, name: '第一坑道', length: '100', deep: '150', first: '0', now: '14', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '黄色'
-    },
-    {
-      uniqueId: 3, name: '第一坑道', length: '100', deep: '150', first: '0', now: '10', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '红色'
-    },
-    {
-      uniqueId: 4, name: '第一坑道', length: '100', deep: '150', first: '0', now: '25', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '红色'
-    },
-    {
-      uniqueId: 0, name: '第一坑道', length: '100', deep: '150', first: '0', now: '14', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '红色'
-    },
-    {
-      uniqueId: 0, name: '第一坑道', length: '100', deep: '150', first: '0', now: '5', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '红色'
-    },
-    {
-      uniqueId: 0, name: '第一坑道', length: '100', deep: '150', first: '0', now: '8', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '红色'
-    },
-    {
-      uniqueId: 0, name: '第一坑道', length: '100', deep: '150', first: '0', now: '9', changeRate: '50%',
-      nowChange: '5', max: '5000', maxTime: '10:22:10', warningLevel: '红色'
-    }
+    
   ]
 }
 
@@ -50,28 +40,37 @@ declare var echarts: any;
   templateUrl: 'ZMineTable.component.html'
 })
 export class ZMineTable {
+  private headerRight:{icon:string,text:string}={icon:'book',text:'启用'};
+
+
   private mZWindowResizeEvent: any;     //系统窗口监听事件
 
-  data = gZtempData;
+  mZdata = gZtempData;
   echartsShow: any;
   selectedItem: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
-    if (!this.selectedItem) {
-    }
+  }
+
+
+  zSonEditChange(a){
+    alert(document.getElementById('editAllow').getAttribute('checked'));
+    document.getElementById('editAllow').setAttribute('checked','false');
   }
 
   ngAfterContentInit() {
-    this.echartsShow = echarts.init(document.getElementById('echarts-table'))
+    this.headerRight.text='开启编辑';
+    this.headerRight.icon='book';
+
+    this.echartsShow = echarts.init(document.getElementById('echarts-table'));
 
     // 指定图表的配置项和数据
     this.echartsShow.setOption({
       tooltip: { trigger: 'item' },//鼠标停留时的显示信息
       xAxis: {//x坐标轴
-        data: this.data.datas.map(function (item) {
-          return item.uniqueId;
+        data: this.mZdata.datas.map(function (item) {
+          return item.mZuniqueId;
         })
       },
       yAxis: {
@@ -90,9 +89,9 @@ export class ZMineTable {
         }
       },
       dataZoom: [{
-        startValue: '2014-06-01'
+        startValue: '0'
       }, {
-        type: 'inside'
+        disabled: true,
       }],
       visualMap: {
         top: 10,
@@ -108,8 +107,10 @@ export class ZMineTable {
       series: {
         name: '',
         type: 'bar',
-        data: this.data.datas.map(function (item) {
-          return item.now;
+        clickable:false,
+        roam: false,
+        data: this.mZdata.datas.map(function (item) {
+          return item.mZnow;
         }),
         label: {
           normal: {
@@ -137,6 +138,7 @@ export class ZMineTable {
 
     // 使用刚指定的配置项和数据显示图表。
     //this.echartsShow.setOption(option);
+    this.echartsShow.on('mousedown',function(){});
     this.mZWindowResizeEvent = window.onresize;
 
     window.onresize = function () { echarts.getInstanceByDom(document.getElementById("echarts-table")).resize(); }
@@ -148,14 +150,20 @@ export class ZMineTable {
       this.echartsShow.resize();
     });*/
   }
+  
+  changeHeaderRight(){
+    if(this.headerRight.text=="开启编辑"){
+      this.headerRight.text="编辑中";
+      this.headerRight.icon='brush';
+    }
+    else{
+      this.headerRight.text="开启编辑"
+      this.headerRight.icon='book';
+    }
+  }
 
   ngOnDestroy() {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-
     window.onresize = this.mZWindowResizeEvent;
-    /*if (this.sizeCheckInterval) clearInterval(this.sizeCheckInterval);
-    this.reSize$.complete();*/
   }
 
 

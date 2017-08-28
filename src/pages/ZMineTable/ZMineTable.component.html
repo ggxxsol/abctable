@@ -1,21 +1,28 @@
 <ion-header>
   <ion-navbar>
     <button *ngIf="!selectedItem">
-        <ion-icon name=""></ion-icon>
-      </button>
-    <ion-title>{{selectedItem.title}}</ion-title>
+      <ion-icon name=""></ion-icon>
+    </button>
+      <ion-title class="title">{{selectedItem.title}}</ion-title> 
+      <ion-buttons end>
+          <a end class="button"><ion-icon side="right" name={{headerRight.icon}} (click)="changeHeaderRight()">{{headerRight.text}}</ion-icon></a>
+      </ion-buttons>
+      
   </ion-navbar>
+  
+ 
+  
 </ion-header>
 
 <ion-content padding>
-
-  <h1>KJ649应力在线监测预警系统日报表({{data.area}})</h1>
+  <div class="floatEdit"></div>
+  <h1>KJ649应力在线监测预警系统日报表({{mZdata.mZarea}}掘进工作面)</h1>
   <table>
     <tr>
       <td colspan="2">监测日期:</td>
-      <td colspan="5">{{data.detectTime}} </td>
+      <td colspan="5">{{mZdata.mZdetectTime}} </td>
       <td colspan="2">上报日期:</td>
-      <td colspan="3"> {{data.reportTime}}</td>
+      <td colspan="3"> {{mZdata.mZreportTime}}</td>
     </tr>
     <tr>
       <td class="none"> </td>
@@ -38,20 +45,20 @@
 
     <tr>
       <td colspan="2">设计长度</td>
-      <td colspan="4">{{data.length}}</td>
+      <td colspan="4">{{mZdata.length}}</td>
       <td colspan="2">剩余长度</td>
-      <td colspan="4">{{data.remainLength}}</td>
+      <td colspan="4">{{mZdata.remainLength}}</td>
     </tr>
     <tr>
       <th class="big" colspan="12">掘进工作面进尺</th>
     </tr>
     <tr>
       <td colspan="2">本日进尺</td>
-      <td colspan="2">{{data.todayLength}}</td>
+      <td colspan="2">{{mZdata.todayLength}}</td>
       <td colspan="2">本月累计进尺</td>
-      <td colspan="2">{{data.monthLength}}</td>
+      <td colspan="2">{{mZdata.monthLength}}</td>
       <td colspan="2">总进尺</td>
-      <td colspan="2">{{data.totalLength}}</td>
+      <td colspan="2">{{mZdata.totalLength}}</td>
     </tr>
     <tr>
       <th class="big" colspan="12">监测数据统计信息</th>
@@ -69,27 +76,25 @@
       <th>预警级别</th>
     </tr>
 
-    <tr *ngFor="let cell of data.datas">
-      <td colspan="2">{{cell.name}}</td>
-      <td>{{cell.length}}</td>
-      <td>{{cell.length}}</td>
-      <td>{{cell.first}}</td>
-      <td>{{cell.now}}</td>
-      <td>{{cell.changeRate}}</td>
-      <td>{{cell.nowChange}}</td>
-      <td>{{cell.max}}</td>
-      <td colspan="2">{{cell.maxTime}}</td>
+    <tr class="currectData" *ngFor="let cell of mZdata.datas">
+      <td colspan="2">{{cell.mZname}}</td>
+      <td>{{cell.mZlength}}</td>
+      <td>{{cell.mZlength}}</td>
+      <td>{{cell.mZfirst}}</td>
+      <td>{{cell.mZnow}}</td>
+      <td>{{cell.mZchangeRate}}</td>
+      <td>{{cell.mZnowChange}}</td>
+      <td>{{cell.mZmax}}</td>
+      <td colspan="2">{{cell.mZmaxTime}}</td>
 
-      <td class="{{cell.warningLevel}}">{{cell.warningLevel}}
+      <td class="{{cell.mZwarningLevel}}">{{cell.mZwarningLevel}}
       </td>
-
-
     </tr>
     <tr>
-      <th class="big" colspan="12">{{data.area}}掘进工作面最大时刻云图及柱状图</th>
+      <th class="big" colspan="12">{{mZdata.mZarea}}掘进工作面最大时刻云图及柱状图</th>
     </tr>
     <tr>
-      <td colspan="12">
+      <td class="none" colspan="12">
         <div id="show"></div>
         <div id="echarts-table"></div>
       </td>

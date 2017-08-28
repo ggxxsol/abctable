@@ -24,6 +24,7 @@ export class ListPage {
         note: 'This is item #' + i,
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
+      this.items[0].title='应力在线监测预警系统日报表';
     }
   }
 
