@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NavController, NavParams } from 'ionic-angular';
+import { ViewController,NavController,ModalController, NavParams } from 'ionic-angular';
 const gZtempData = {
-  mZarea: '泰安001', mZdetectTime: '201 -XX-XX XX:XX:XX------20XX-XX-XX', mZreportTime: '2015-5-6', mZlength: '500m',
+  mZtableName:'KJ649应力在线监测预警系统日报表',mZarea: '泰安001', mZdetectTime: '201 -XX-XX XX:XX:XX------20XX-XX-XX', mZreportTime: '2015-5-6', mZlength: '500m',
   mZremainLength: '100m', mZtodayLength: '20m', mZmonthLength: '360m', mZtotalLength: '2000m',
   datas: [
     { 
@@ -49,22 +49,18 @@ export class ZMineTable {
   echartsShow: any;
   selectedItem: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public modalCtrl: ModalController) {
     this.selectedItem = navParams.get('item');
   }
 
 
-  zSonEditChange(a){
-    alert(document.getElementById('editAllow').getAttribute('checked'));
-    document.getElementById('editAllow').setAttribute('checked','false');
-  }
+
 
   ngAfterContentInit() {
     this.headerRight.text='开启编辑';
     this.headerRight.icon='book';
 
     this.echartsShow = echarts.init(document.getElementById('echarts-table'));
-
     // 指定图表的配置项和数据
     this.echartsShow.setOption({
       tooltip: { trigger: 'item' },//鼠标停留时的显示信息
@@ -137,28 +133,30 @@ export class ZMineTable {
     })
 
     // 使用刚指定的配置项和数据显示图表。
-    //this.echartsShow.setOption(option);
     this.echartsShow.on('mousedown',function(){});
     this.mZWindowResizeEvent = window.onresize;
 
     window.onresize = function () { echarts.getInstanceByDom(document.getElementById("echarts-table")).resize(); }
-    /*this.sizeCheckInterval = setInterval(() => {
-      document.getElementById('show').innerHTML= document.getElementById('echarts-table').offsetWidth.toString();
-      this.reSize$.next(this.echartsDiv.offsetWidth);
-    }, 10000);*/
-    /*this.onResize = this.reSize$.distinctUntilChanged().delay(400).subscribe((_) => {
-      this.echartsShow.resize();
-    });*/
+
   }
   
   changeHeaderRight(){
     if(this.headerRight.text=="开启编辑"){
       this.headerRight.text="编辑中";
       this.headerRight.icon='brush';
+
     }
     else{
       this.headerRight.text="开启编辑"
       this.headerRight.icon='book';
+    }
+  }
+
+  showEdit(data?){
+    if(this.headerRight.text=="开启编辑"){
+      alert(data.mZtableName)
+      let profileModal = this.modalCtrl.create(ZeditTable,{thisData:data});
+      profileModal.present();
     }
   }
 
@@ -167,4 +165,27 @@ export class ZMineTable {
   }
 
 
+}
+
+
+@Component({
+  selector: 'editTable',
+  templateUrl: 'ZeditTable.component.html'
+})
+export class ZeditTable{
+  data1:any;
+  data:any;
+  constructor(params?: NavParams,public viewCtrl?: ViewController) {
+    this.data1=params;
+  }
+  ngAfterContentInit() {
+    //Called after ngOnInit when the component's or directive's content has been initialized.
+    //Add 'implements AfterContentInit' to the class.
+    this.data=this.data1.get('thisData');
+    alert(this.data.mZtableName)
+  }
+
+  close(){
+    this.viewCtrl.dismiss();
+  }
 }

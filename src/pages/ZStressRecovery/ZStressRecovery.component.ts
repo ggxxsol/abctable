@@ -46,8 +46,8 @@ const gZtempData = {
 
 declare var echarts: any;
 @Component({
-  selector: 'Strain-Online',
-  templateUrl: 'ZMineTable.component.html'
+  selector: 'ZStress',
+  templateUrl: 'ZStressRecovery.component.html'
 })
 export class ZMineTable {
   private mZWindowResizeEvent: any;     //系统窗口监听事件
