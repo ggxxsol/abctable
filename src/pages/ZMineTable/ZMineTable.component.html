@@ -73,8 +73,8 @@
       <th>预警级别</th>
     </tr>
 
-    <tr class="currectData" *ngFor="let cell of mZdata.datas" (click)="showEdit(cell)">
-      <td colspan="2" (click)="showEdit(cell,mZdata.mZtableName)">{{cell.mZname}}</td>
+    <tr class="currectData" *ngFor="let cell of mZdata.datas" (click)="showEditData(cell,mZdata.mZtableName)">
+      <td colspan="2">{{cell.mZname}}</td>
       <td>{{cell.mZlength}}</td>
       <td>{{cell.mZlength}}</td>
       <td>{{cell.mZfirst}}</td>
