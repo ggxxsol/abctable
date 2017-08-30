@@ -13,7 +13,7 @@
 
 <ion-content padding>
   <div class="floatEdit"></div>
-  <h1>{{mZdata.mZtableName}}({{mZdata.mZarea}}掘进工作面)</h1>
+  <h1 (click)="makeHTMLTable()">{{mZdata.mZtableName}}({{mZdata.mZarea}}掘进工作面)</h1>
   <table border="0">
     <tr class="currectData" (click)="showEditHead()">
       <td colspan="2">监测日期:</td>
@@ -105,7 +105,6 @@
       <td colspan="2">{{mZdata.mZchairMan}} </td>
       <td colspan="">副总:</td>
       <td colspan="2">{{mZdata.mZviceManager}} </td>
-
     </tr>
   </table>
   <div style="min-height:150px"></div>
