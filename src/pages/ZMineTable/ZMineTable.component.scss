@@ -1,3 +1,5 @@
+
+Strain-Online{
 h1{
     text-align: center;
 }
@@ -30,7 +32,7 @@ h1{
  td {
 	text-align: center;
     width: 150px;
-    min-width: 10px;
+    min-width: 5px;
 	border-width: 1px;
 	padding: 3px;
 	border-style: solid;
@@ -73,16 +75,13 @@ img{
 	padding: 10px;
 	
 }
-.currectData:hover{
-	color: #000000;
-	background: #2EF6F8;
-}
+
 
 tr:nth-child(even) {
 	border-width: 1px;
 	padding: 3px;
 	border-style: solid;
-	border-color: #666666;
+	border-color: #FFFFFF;
 	background-color: #dedede;
 }
 
@@ -93,8 +92,16 @@ tr:nth-child(even) {
 	height: 1000px;
 	width: 2000px;
 	background: #999999;
-	
 }
 .editTalbe{
 	margin-top: 20%;
+}
+	tr.tableSelected{
+		color: #000000;
+		background: #2EF6F8;
+	}
+	.currectData:hover{
+		color: #000000;
+		background: #2EF6F8;
+	}
 }

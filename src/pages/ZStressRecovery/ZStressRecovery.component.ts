@@ -150,12 +150,7 @@ export class ZMineTable {
   }
 
   ngOnDestroy() {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-
     window.onresize = this.mZWindowResizeEvent;
-    /*if (this.sizeCheckInterval) clearInterval(this.sizeCheckInterval);
-    this.reSize$.complete();*/
   }
 
 

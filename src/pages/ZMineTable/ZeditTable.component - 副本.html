@@ -21,9 +21,7 @@
 
 <ion-content>
         <ion-item *ngFor="let cell of data">
-                <ion-label class="inputForIe" color="primary" stacked>{{cell.name}}</ion-label>
-                <ion-input *ngIf="cell.type!='emun'" class="inputForIe" type="text" [(ngModel)]="cell.data" ></ion-input>
-                <ion-input *ngIf="cell.type=='emun'" readonly='true' class="inputForIe" type="text" (click)="showRadio(cell)" [(ngModel)]="cell.data" ></ion-input>       
+                <ion-label color="primary" stacked>{{cell.name}}</ion-label>
+                <ion-input type="text" [(ngModel)]="cell.data" ></ion-input>
         </ion-item>
-        <div style="min-height:150px"></div>
 </ion-content>

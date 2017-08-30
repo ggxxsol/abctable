@@ -7,28 +7,28 @@ const gZtempData = {
   mZremainLength: '100m', mZtodayLength: '20m', mZmonthLength: '360m', mZtotalLength: '2000m',
   datas: [
     {
-      mZuniqueId: 0, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '1', mZchangeRate: '50%',
+      mZuniqueId: 0, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '1', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '绿色'
     }, {
-      mZuniqueId: 1, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '3', mZchangeRate: '50%',
+      mZuniqueId: 1, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '3', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '红色'
     }, {
-      mZuniqueId: 2, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '9', mZchangeRate: '50%',
+      mZuniqueId: 2, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '9', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '黄色'
     }, {
-      mZuniqueId: 3, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '10', mZchangeRate: '50%',
+      mZuniqueId: 3, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '10', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '绿色'
     }, {
-      mZuniqueId: 4, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '20', mZchangeRate: '50%',
+      mZuniqueId: 4, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '20', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '红色'
     }, {
-      mZuniqueId: 5, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '6', mZchangeRate: '50%',
+      mZuniqueId: 5, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '6', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '绿色'
     }, {
-      mZuniqueId: 6, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '18', mZchangeRate: '50%',
+      mZuniqueId: 6, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '18', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '黄色'
     }, {
-      mZuniqueId: 7, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '3', mZchangeRate: '50%',
+      mZuniqueId: 7, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '3', mZchangeRate: '50',
       mZnowChange: '5', mZmax: '5000', mZmaxTime: '10:22:10', mZwarningLevel: '黄色'
     },
 
@@ -36,22 +36,20 @@ const gZtempData = {
 }
 
 declare var echarts: any;
+
 @Component({
   selector: 'Strain-Online',
   templateUrl: 'ZMineTable.component.html'
 })
 export class ZMineTable {
   private headerRight: { icon: string, text: string } = { icon: 'book', text: '启用' };
-
-
   private mZWindowResizeEvent: any;     //系统窗口监听事件
-
-  mZdata = gZtempData;
-  echartsShow: any;
-  selectedItem: any;
+  private mZdata = gZtempData;          //外部临时数据
+  private echartsShow: any;             //Echarts图表
+  private edittingData:any;             //编辑数据传输变量
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
-    this.selectedItem = navParams.get('item');
+    //this.selectedItem = navParams.get('item');
   }
 
 
@@ -140,7 +138,7 @@ export class ZMineTable {
     window.onresize = function () { echarts.getInstanceByDom(document.getElementById("echarts-table")).resize(); }
 
   }
-
+//头部编辑按钮
   changeHeaderRight() {
     if (this.headerRight.text == "开启编辑") {
       this.headerRight.text = "编辑中";
@@ -153,32 +151,54 @@ export class ZMineTable {
     }
   }
 
+
+
+
+
+
   showEditData(data?, tableName?) {
+    this.edittingData=data;
+    data.isSelect='tableSelected';
     if (this.headerRight.text == "开启编辑") {
       let profileModal = this.modalCtrl.create(ZeditTable, {
         tableName: tableName,
         data: [//标题,控件类型(1字符和2数字,3枚举),传入值(),范围界限(枚举的个数的两倍),范围参数(枚举特殊)
-          { name: '测点名称', type: 'text', data: data.mZname, limitCount: 1, min: 0, max: 20 },
-          { name: '距离开口距离(m)', type: 'number', data: data.mZlength, limitCount: 2, min: 0, max: 500 },
-          { name: '安装深度(m)', type: 'number', data: data.mZdeep, limitCount: 2, min: 0, max: 500 },
-          { name: '初始预压(Mpa)', type: 'number', data: data.mZfirst, limitCount: 2, min: 0, max: 500 },
-          { name: '当前应力值', type: 'number', data: data.mZnow, limitCount: 2, min: 0, max: 500 },
-          { name: '增幅变化率(%)', type: 'number', data: data.mZchangeRate, limitCount: 2, min: 0, max: 100 },
+          { name: '测点名称',         type: 'text',   data: data.mZname,    limitCount: 1, min: 0, max: 20 },
+          { name: '距离开口距离(m)',  type: 'number',  data: data.mZlength, limitCount: 2, min: 0, max: 500 },
+          { name: '安装深度(m)',      type: 'number', data: data.mZdeep,    limitCount: 2, min: 0, max: 500 },
+          { name: '初始预压(Mpa)',    type: 'number', data: data.mZfirst,   limitCount: 2, min: 0, max: 500 },
+          { name: '当前应力值',       type: 'number', data: data.mZnow,      limitCount: 2, min: 0, max: 500 },
+          { name: '增幅变化率(%)',    type: 'number', data: data.mZchangeRate, limitCount: 2, min: 0, max: 100 },
           { name: '当日变化量(±Mpa)', type: 'number', data: data.mZnowChange, limitCount: 2, min: 0, max: 500 },
-          { name: '最大值(Mpa)', type: 'number', data: data.mZmax, limitCount: 2, min: 0, max: 500 },
-          { name: '最大值时刻', type: 'text', data: data.mZmaxTime, limitCount: 1, limit: 40 },
-          { name: '预警级别', type: 'emun', data: data.mZwarningLevel, limitCount: 6, limit: [0, '绿色', 1, '黄色', 2, '红色'] },
+          { name: '最大值(Mpa)',      type: 'number', data: data.mZmax,      limitCount: 2, min: 0, max: 500 },
+          { name: '最大值时刻',       type: 'text',   data: data.mZmaxTime,    limitCount: 1, limit: 40 },
+          { name: '预警级别',         type: 'emun',   data: data.mZwarningLevel, limitCount: 6, limit: [0, '绿色', 1, '黄色', 2, '红色'] },
         ]
       });
+
       profileModal.onDidDismiss(data => {
-        console.log(data);
-        alert(1);
+        if(!data)return;
+        let index=0;
+        this.edittingData.mZname=data[index++].data;
+        this.edittingData.mZlength=data[index++].data;
+        this.edittingData.mZdeep=data[index++].data;
+        this.edittingData.mZfirst=data[index++].data;
+        this.edittingData.mZnow=data[index++].data;
+        this.edittingData.mZchangeRate=data[index++].data;
+        this.edittingData.mZnowChange=data[index++].data;
+        this.edittingData.mZmax=data[index++].data;
+        this.edittingData.mZmaxTime=data[index++].data;
+        this.edittingData.mZwarningLevel=data[index++].data;
+        
+        this.edittingData.isSelect=""
+        this.edittingData=null;
       });
       profileModal.present();
     }
   }
 
   ngOnDestroy() {
+    //必要,调整窗口时必须使用
     window.onresize = this.mZWindowResizeEvent;
   }
 

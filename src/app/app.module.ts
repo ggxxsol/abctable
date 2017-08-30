@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
@@ -9,7 +7,7 @@ import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { ZMineTable } from '../pages/ZMineTable/ZMineTable.component';
 import { ZeditTable } from '../pages/ZMineTable/ZeditTable.component'
-
+import { FormsModule }   from '@angular/forms'; // <-- NgModel lives here
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 

@@ -13,3 +13,24 @@
     color:rebeccapurple;
     position: relative;
 }
+.left{
+    position: relative;
+    top: 0px;
+    padding-top : 0px;
+    font-size: 15px;
+    width: 500px;
+    text-align: left;
+}
+.right{
+    
+    position: relative;
+    
+    top: 0px;
+    padding-top: 0px;
+    font-size: 15px;
+    width:200px;
+    text-align: right;
+}
+.inputForIe{
+    min-height: 30px;
+}
