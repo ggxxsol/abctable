@@ -46,7 +46,7 @@ export class ZMineTable {
   private mZWindowResizeEvent: any;     //系统窗口监听事件
   private mZdata = gZtempData;          //外部临时数据
   private echartsShow: any;             //Echarts图表
-  private edittingData:any;             //编辑数据传输变量
+  private edittingData: any;             //编辑数据传输变量
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     //this.selectedItem = navParams.get('item');
@@ -56,7 +56,8 @@ export class ZMineTable {
 
 
   ngAfterContentInit() {
-    this.headerRight.text = '开启编辑';
+    //头部右侧内容
+    this.headerRight.text = '编辑中';
     this.headerRight.icon = 'book';
 
     this.echartsShow = echarts.init(document.getElementById('echarts-table'));
@@ -138,7 +139,8 @@ export class ZMineTable {
     window.onresize = function () { echarts.getInstanceByDom(document.getElementById("echarts-table")).resize(); }
 
   }
-//头部编辑按钮
+
+  //头部编辑按钮
   changeHeaderRight() {
     if (this.headerRight.text == "开启编辑") {
       this.headerRight.text = "编辑中";
@@ -151,47 +153,85 @@ export class ZMineTable {
     }
   }
 
+  showEditHead() {
+
+    if (this.headerRight.text == "编辑中") {
+      let profileModal = this.modalCtrl.create(ZeditTable, {
+        tableName: this.mZdata.mZtableName,
+        data: [//标题,控件类型(1字符和2数字,3枚举),传入值(),范围界限(枚举的个数的两倍),范围参数(枚举特殊)
+          { name: '监测日期', type: 'text', data: this.mZdata.mZdetectTime, limitCount: 1, min: 0, max: 20 },
+          { name: '上报日期', type: 'text', data: this.mZdata.mZreportTime, limitCount: 1, min: 0, max: 20 },
+          { name: '设计长度', type: 'text', data: this.mZdata.mZlength, limitCount: 1, min: 0, max: 20 },
+          { name: '剩余长度', type: 'text', data: this.mZdata.mZremainLength, limitCount: 1, min: 0, max: 20 },
+          { name: '本日进尺', type: 'text', data: this.mZdata.mZtodayLength, limitCount: 1, min: 0, max: 20 },
+          { name: '本月累计进尺', type: 'text', data: this.mZdata.mZmonthLength, limitCount: 1, min: 0, max: 20 },
+          { name: '总进尺', type: 'text', data: this.mZdata.mZtotalLength, limitCount: 1, min: 0, max: 20 },
+        ]
+      });
+
+      profileModal.onDidDismiss(data => {
+        if (!data) return;
+        let index = 0;
+        this.mZdata.mZdetectTime = data[index++].data;
+        this.mZdata.mZreportTime = data[index++].data;
+        this.mZdata.mZlength = data[index++].data;
+        this.mZdata.mZremainLength = data[index++].data;
+        this.mZdata.mZtodayLength = data[index++].data;
+        this.mZdata.mZmonthLength = data[index++].data;
+        this.mZdata.mZtotalLength = data[index++].data;
+
+      });
+      profileModal.present();
+    }
+  }
 
 
 
 
 
   showEditData(data?, tableName?) {
-    this.edittingData=data;
-    data.isSelect='tableSelected';
-    if (this.headerRight.text == "开启编辑") {
+    if (this.headerRight.text == "编辑中") {
+
+      this.edittingData = data;
+      data.isSelect = 'tableSelected';
       let profileModal = this.modalCtrl.create(ZeditTable, {
         tableName: tableName,
         data: [//标题,控件类型(1字符和2数字,3枚举),传入值(),范围界限(枚举的个数的两倍),范围参数(枚举特殊)
-          { name: '测点名称',         type: 'text',   data: data.mZname,    limitCount: 1, min: 0, max: 20 },
-          { name: '距离开口距离(m)',  type: 'number',  data: data.mZlength, limitCount: 2, min: 0, max: 500 },
-          { name: '安装深度(m)',      type: 'number', data: data.mZdeep,    limitCount: 2, min: 0, max: 500 },
-          { name: '初始预压(Mpa)',    type: 'number', data: data.mZfirst,   limitCount: 2, min: 0, max: 500 },
-          { name: '当前应力值',       type: 'number', data: data.mZnow,      limitCount: 2, min: 0, max: 500 },
-          { name: '增幅变化率(%)',    type: 'number', data: data.mZchangeRate, limitCount: 2, min: 0, max: 100 },
+          { name: '测点名称', type: 'text', data: data.mZname, limitCount: 1, min: 0, max: 20 },
+          { name: '距离开口距离(m)', type: 'number', data: data.mZlength, limitCount: 2, min: 0, max: 500 },
+          { name: '安装深度(m)', type: 'number', data: data.mZdeep, limitCount: 2, min: 0, max: 500 },
+          { name: '初始预压(Mpa)', type: 'number', data: data.mZfirst, limitCount: 2, min: 0, max: 500 },
+          { name: '当前应力值', type: 'number', data: data.mZnow, limitCount: 2, min: 0, max: 500 },
+          { name: '增幅变化率(%)', type: 'number', data: data.mZchangeRate, limitCount: 2, min: 0, max: 100 },
           { name: '当日变化量(±Mpa)', type: 'number', data: data.mZnowChange, limitCount: 2, min: 0, max: 500 },
-          { name: '最大值(Mpa)',      type: 'number', data: data.mZmax,      limitCount: 2, min: 0, max: 500 },
-          { name: '最大值时刻',       type: 'text',   data: data.mZmaxTime,    limitCount: 1, limit: 40 },
-          { name: '预警级别',         type: 'emun',   data: data.mZwarningLevel, limitCount: 6, limit: [0, '绿色', 1, '黄色', 2, '红色'] },
+          { name: '最大值(Mpa)', type: 'number', data: data.mZmax, limitCount: 2, min: 0, max: 500 },
+          { name: '最大值时刻', type: 'text', data: data.mZmaxTime, limitCount: 1, limit: 40 },
+          { name: '预警级别', type: 'emun', data: data.mZwarningLevel, limitCount: 6, limit: [0, '绿色', 1, '黄色', 2, '红色'] },
         ]
       });
 
       profileModal.onDidDismiss(data => {
-        if(!data)return;
-        let index=0;
-        this.edittingData.mZname=data[index++].data;
-        this.edittingData.mZlength=data[index++].data;
-        this.edittingData.mZdeep=data[index++].data;
-        this.edittingData.mZfirst=data[index++].data;
-        this.edittingData.mZnow=data[index++].data;
-        this.edittingData.mZchangeRate=data[index++].data;
-        this.edittingData.mZnowChange=data[index++].data;
-        this.edittingData.mZmax=data[index++].data;
-        this.edittingData.mZmaxTime=data[index++].data;
-        this.edittingData.mZwarningLevel=data[index++].data;
-        
-        this.edittingData.isSelect=""
-        this.edittingData=null;
+        this.edittingData.isSelect = ""
+        if (!data) return;
+        let index = 0;
+        this.edittingData.mZname = data[index++].data;
+        this.edittingData.mZlength = data[index++].data;
+        this.edittingData.mZdeep = data[index++].data;
+        this.edittingData.mZfirst = data[index++].data;
+        this.edittingData.mZnow = data[index++].data;
+        this.edittingData.mZchangeRate = data[index++].data;
+        this.edittingData.mZnowChange = data[index++].data;
+        this.edittingData.mZmax = data[index++].data;
+        this.edittingData.mZmaxTime = data[index++].data;
+        this.edittingData.mZwarningLevel = data[index++].data;
+        this.echartsShow.setOption({
+          series: {
+            data: this.mZdata.datas.map(function (item) {
+              return item.mZnow;
+            })
+          }
+        })
+        this.edittingData = null;
       });
       profileModal.present();
     }

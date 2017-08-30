@@ -15,7 +15,7 @@
   <div class="floatEdit"></div>
   <h1>{{mZdata.mZtableName}}({{mZdata.mZarea}}掘进工作面)</h1>
   <table border="0">
-    <tr class="currectData">
+    <tr class="currectData" (click)="showEditHead()">
       <td colspan="2">监测日期:</td>
       <td colspan="5">{{mZdata.mZdetectTime}} </td>
       <td colspan="2">上报日期:</td>
@@ -40,7 +40,7 @@
       <th class="big" colspan="12">掘进工作面参数</th>
     </tr>
 
-    <tr class="currectData">
+    <tr class="currectData" (click)="showEditHead()">
       <td colspan="2">设计长度</td>
       <td colspan="4">{{mZdata.mZlength}}</td>
       <td colspan="2">剩余长度</td>
@@ -49,7 +49,7 @@
     <tr>
       <th class="big" colspan="12">掘进工作面进尺</th>
     </tr>
-    <tr class="currectData">
+    <tr class="currectData" (click)="showEditHead()">
       <td colspan="2">本日进尺</td>
       <td colspan="2">{{mZdata.mZtodayLength}}</td>
       <td colspan="2">本月累计进尺</td>
