@@ -4,7 +4,7 @@ import { ZeditTable } from './ZeditTable.component'
 
 const gZtempData = {
   mZtableName: 'KJ649应力在线监测预警系统日报表', mZarea: '泰安001', mZdetectTime: '201 -XX-XX XX:XX:XX------20XX-XX-XX', mZreportTime: '2015-5-6', mZlength: '500m',
-  mZremainLength: '100m', mZtodayLength: '20m', mZmonthLength: '360m', mZtotalLength: '2000m',
+  mZremainLength: '100m', mZtodayLength: '20m', mZmonthLength: '360m', mZtotalLength: '2000m',mZcompany:'山东制表',mZrepotrMan:'张三',mZchairMan:'张三主任',mZviceManager:'李四副总',
   datas: [
     {
       mZuniqueId: 0, mZname: '第一坑道', mZlength: '100', mZdeep: '150', mZfirst: '0', mZnow: '1', mZchangeRate: '50',
@@ -142,6 +142,7 @@ export class ZMineTable {
 
   //头部编辑按钮
   changeHeaderRight() {
+    if(this.edittingData)this.edittingData.isSelect = ""
     if (this.headerRight.text == "开启编辑") {
       this.headerRight.text = "编辑中";
       this.headerRight.icon = 'brush';
@@ -186,12 +187,39 @@ export class ZMineTable {
   }
 
 
+  showEditEnd() {
+    
+        if (this.headerRight.text == "编辑中") {
+          let profileModal = this.modalCtrl.create(ZeditTable, {
+            tableName: this.mZdata.mZtableName,
+            data: [//标题,控件类型(1字符和2数字,3枚举),传入值(),范围界限(枚举的个数的两倍),范围参数(枚举特殊)
+              { name: '制表单位', type: 'text', data: this.mZdata.mZcompany, limitCount: 1, min: 0, max: 20 },
+              { name: '汇报人', type: 'text', data: this.mZdata.mZrepotrMan, limitCount: 1, min: 0, max: 20 },
+              { name: '主任', type: 'text', data: this.mZdata.mZchairMan, limitCount: 1, min: 0, max: 20 },
+              { name: '副总', type: 'text', data: this.mZdata.mZviceManager, limitCount: 1, min: 0, max: 20 },
+              ]
+          });
+    
+          profileModal.onDidDismiss(data => {
+            if (!data) return;
+            let index = 0;
+            this.mZdata.mZcompany= data[index++].data;
+            this.mZdata.mZrepotrMan= data[index++].data;
+            this.mZdata.mZchairMan= data[index++].data;
+            this.mZdata.mZviceManager= data[index++].data;
+    
+          });
+          profileModal.present();
+        }
+      }
+    
+
 
 
 
   showEditData(data?, tableName?) {
     if (this.headerRight.text == "编辑中") {
-
+      if(this.edittingData)this.edittingData.isSelect = ""
       this.edittingData = data;
       data.isSelect = 'tableSelected';
       let profileModal = this.modalCtrl.create(ZeditTable, {
@@ -211,7 +239,6 @@ export class ZMineTable {
       });
 
       profileModal.onDidDismiss(data => {
-        this.edittingData.isSelect = ""
         if (!data) return;
         let index = 0;
         this.edittingData.mZname = data[index++].data;
@@ -231,7 +258,6 @@ export class ZMineTable {
             })
           }
         })
-        this.edittingData = null;
       });
       profileModal.present();
     }
